@@ -1,16 +1,19 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <Home :title="getTitle" />
+  <Home :title="getTitle()" />
+  <List :characters="this.characters" />
 </template>
 
 <script>
-import Home from './components/home-page.vue';
 import {apiCall} from './apis/get-info';
+import Home from './components/home-page.vue';
+import List from './components/list-characters.vue'
 
 export default {
   name: 'App',
   components: {
-    Home
+    Home,
+    List
   },
   data() {
     return {
@@ -22,18 +25,19 @@ export default {
     getTitle() {
       return this.pageTitle;
     },
-     getNameTitle() {
-     return this.pageTitle = this.characters[2].name
+
+     async getNameTitle() {
+      try {
+        this.characters = await apiCall();
+        console.log(this.characters);
+        this.pageTitle = this.characters[2].name;
+      } catch (error) {
+        console.error("Error in the API call:", error);
+      }
     }
   },
-  async created() {
-    try {
-      this.characters = await apiCall();
-      console.log(this.characters);
-      this.getNameTitle();
-    } catch (error) {
-      console.error("Error in the API call:", error);
-    }
+   async created() {
+    this.getNameTitle(); 
   },
   // mounted() executes before created()
   mounted() {
@@ -50,5 +54,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

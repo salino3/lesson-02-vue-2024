@@ -1,0 +1,8 @@
+.rootHome {
+    background: lightblue;
+    width: 300px;
+}
+
+.rootList li {
+    margin: 10px;
+}

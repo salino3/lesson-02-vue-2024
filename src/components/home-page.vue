@@ -1,6 +1,6 @@
 
 <template>
-    <div class="root">
+    <div class="rootHome">
         <h1>
       {{ title }}
         </h1>
@@ -8,6 +8,7 @@
 </template>
 
 <script>
+
 export default {
     props: {
         title: Function
@@ -17,3 +18,7 @@ export default {
 </script>
 
 
+<style>
+@import url('./styles-components.css');
+
+</style>
